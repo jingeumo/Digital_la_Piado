@@ -43,4 +43,12 @@ public class BoardController {
 
     public void gongjisanhang(int gongjisanhang) {
     }
+
+    public List<String> getAnnouncements() {
+
+
+        return List.of();
+    }
 }
+
+

@@ -63,11 +63,27 @@ public class BoardView {
                     break;
 
                 case 5:
-                    //공지사항 확인
-                    System.out.println("공지사항 확인하기");
-                    int gongjisanhang = scanner.nextInt();
-                    controller.gongjisanhang(gongjisanhang);
+                    // 공지사항 확인
+                    System.out.print("공지사항을 확인하시겠습니까? (Yes or No): ");
+                    String response = scanner.nextLine().trim().toLowerCase(); // 입력받은 문자열을 소문자로 변환
+                    if (response.equals("yes")) {
+                        // 공지사항을 가져와서 출력
+                        List<String> announcements = controller.getAnnouncements(); // 공지사항을 가져오는 메서드 호출
+                        if (announcements.isEmpty()) {
+                            System.out.println("현재 공지사항이 없습니다.");
+                        } else {
+                            System.out.println("공지사항:");
+                            for (String announcement : announcements) {
+                                System.out.println("- " + announcement);
+                            }
+                        }
+                    } else if (response.equals("no")) {
+                        System.out.println("공지사항 확인을 취소했습니다.");
+                    } else {
+                        System.out.println("잘못된 입력입니다. 'Yes' 또는 'No'를 입력하세요.");
+                    }
                     break;
+
 
                 case 6:
                     // 게시판으로 가기
