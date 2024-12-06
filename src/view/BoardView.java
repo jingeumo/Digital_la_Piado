@@ -12,14 +12,7 @@ public class BoardView {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. 게시글 추가");
-            System.out.println("2. 게시글 조회");
-            System.out.println("3. 게시글 수정");
-            System.out.println("4. 게시글 삭제");
-            System.out.println("5. 공지사항 확인");
-            System.out.println("6. MY Page");
-            System.out.println("7. 신고하기");
-            System.out.println("0. 종료");
+            System.out.println("1. 게시글 추가 2. 게시글 조회 3. 게시글 수정 4. 게시글 삭제 5. 공지사항 확인 6. MY Page 7. 신고하기 0. 종료 ");
             System.out.print("선택: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
