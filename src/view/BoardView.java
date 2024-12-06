@@ -104,6 +104,7 @@ public class BoardView {
                     return;
                 default:
                     System.out.println("잘못된 선택입니다.");
+
             }
         }
     }
