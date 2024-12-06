@@ -17,7 +17,7 @@ public class BoardView {
             System.out.println("3. 게시글 수정");
             System.out.println("4. 게시글 삭제");
             System.out.println("5. 공지사항 확인");
-            System.out.println("6. 게시판으로 가기");
+            System.out.println("6. MY Page");
             System.out.println("7. 신고하기");
             System.out.println("0. 종료");
             System.out.print("선택: ");
