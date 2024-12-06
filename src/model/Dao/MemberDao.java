@@ -1,4 +1,4 @@
-package model.BoardDao;
+package model.Dao;
 
 public class MemberDao {
 }

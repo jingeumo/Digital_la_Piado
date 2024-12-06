@@ -1,1 +1,88 @@
-jkjk
+회원가입 로그인 로그아웃
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class User {
+    String username;
+    String password;
+
+    User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+}
+
+public class UserManagement {
+    private static ArrayList<User> userList = new ArrayList<>();
+    private static User loggedInUser = null;
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.println("1. 회원가입 2. 로그인 3. 로그아웃 4. 종료");
+            int choice = scan.nextInt();
+            scan.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    signUp(scan);
+                    break;
+                case 2:
+                    login(scan);
+                    break;
+                case 3:
+                    logout();
+                    break;
+                case 4:
+                    System.out.println("프로그램을 종료합니다.");
+                    scan.close();
+                    return;
+                default:
+                    System.out.println("잘못된 선택입니다.");
+            }
+        }
+    }
+
+    private static void signUp(Scanner scan) {
+        System.out.print("사용자 이름: ");
+        String username = scan.nextLine();
+        System.out.print("비밀번호: ");
+        String password = scan.nextLine();
+
+        // 사용자 중복 체크
+        for (User user : userList) {
+            if (user.username.equals(username)) {
+                System.out.println("이미 존재하는 사용자 이름입니다.");
+                return;
+            }
+        }
+
+        userList.add(new User(username, password));
+        System.out.println("회원가입이 완료되었습니다.");
+    }
+
+    private static void login(Scanner scan) {
+        System.out.print("사용자 이름: ");
+        String username = scan.nextLine();
+        System.out.print("비밀번호: ");
+        String password = scan.nextLine();
+
+        for (User user : userList) {
+            if (user.username.equals(username) && user.password.equals(password)) {
+                loggedInUser = user;
+                System.out.println("로그인 성공: " + username);
+                return;
+            }
+        }
+        System.out.println("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+    }
+
+    private static void logout() {
+        if (loggedInUser != null) {
+            System.out.println(loggedInUser.username + "님이 로그아웃되었습니다.");
+            loggedInUser = null;
+        } else {
+            System.out.println("로그인 상태가 아닙니다.");
+        }
+    }
+}

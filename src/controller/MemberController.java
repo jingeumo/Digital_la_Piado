@@ -1,4 +1,5 @@
 package controller;
 
-public class MemberController {
+public class MemberController
+{
 }
