@@ -1,3 +1,4 @@
+[ 쿼리문 ]
 drop database if exists project01;   -- 만일 데이터베이스 존재하면 삭제
 create database project01;
 use project01;
@@ -34,6 +35,7 @@ CREATE TABLE Music (
     music_price INT,                            -- 음악 가격
     FOREIGN KEY (music_artist_id) REFERENCES users(user_id)  -- 아티스트 ID에 대한 외래키 제약조건
 );
+
 
 -- PlayHistory 테이블 생성
 CREATE TABLE PlayHistory (
