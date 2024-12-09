@@ -53,6 +53,7 @@ public class BoardDAO {
             e.printStackTrace();
         }
         return boards;
+
     }
 
     // 게시글 ID로 게시글 조회

@@ -13,7 +13,7 @@ public class BoardView {
 
         // 사용자 정보 예시
         String userId = "admin123"; // 예시 사용자 ID
-        String username = "김이름"; // 예시 사용자 이름
+        String username = "john_doe"; // 예시 사용자 이름
         int age = 20; // 예시 나이
         String phone = "01012341234"; // 예시 전화번호
         String email = "admin123@naver.com"; // 예시 이메일
