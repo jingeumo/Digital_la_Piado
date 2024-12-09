@@ -37,6 +37,9 @@ public class UserDto {
         this.userMusic = userMusic;
     }
 
+    public UserDto(String username, String userid, int pwd, String email, int phoneNum) {
+    }
+
     // Getter 및 Setter 메서드
     public int getUserId() {
         return userId;
@@ -124,5 +127,22 @@ public class UserDto {
 
     public void setUserMusic(String userMusic) {
         this.userMusic = userMusic;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userCreatedAt=" + userCreatedAt +
+                ", userPhone='" + userPhone + '\'' +
+                ", userGender=" + userGender +
+                ", userGrade=" + userGrade +
+                ", userUpdatedAt=" + userUpdatedAt +
+                ", userStatus=" + userStatus +
+                ", userMusic='" + userMusic + '\'' +
+                '}';
     }
 }
