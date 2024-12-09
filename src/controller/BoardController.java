@@ -45,10 +45,19 @@ public class BoardController {
     }
 
     public List<String> getAnnouncements() {
-
-
-        return List.of();
+        return null;
     }
+
+    public void registerUser(String name, String username, String password) {
+    }
+
+    public BoardDto getBoardById(int boardId) {
+
+
+        return null;
+    }
+
 }
+
 
 
