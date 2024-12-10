@@ -3,7 +3,7 @@ package model.Dto;
 import java.sql.Timestamp;
 
 public class UserDto {
-    private int userId;                // 사용자 고유 ID
+    private String userId;                // 사용자 고유 ID
     private String username;            // 사용자 이름 (고유)
     private String password;            // 비밀번호 (암호화된 형태로 저장)
     private String userEmail;           // 이메일 주소 (고유)
@@ -20,7 +20,7 @@ public class UserDto {
     }
 
     // 모든 필드를 포함하는 생성자
-    public UserDto(int userId, String username, String password, String userEmail,
+    public UserDto(String userId, String username, String password, String userEmail,
                 Timestamp userCreatedAt, String userPhone, int userGender,
                 int userGrade, Timestamp userUpdatedAt, int userStatus,
                 String userMusic) {
@@ -41,11 +41,11 @@ public class UserDto {
     }
 
     // Getter 및 Setter 메서드
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
