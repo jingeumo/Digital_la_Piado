@@ -26,15 +26,18 @@ public class MemberView {
 
 
     private static void signUp(Scanner scan) {
-        scan.nextLine();
-        System.out.print("사용자 이름: ");   String username = scan.nextLine();
-        System.out.print("아이디: ");   String userid = scan.nextLine();
-        System.out.print("비밀번호: ");   int pwd = scan.nextInt();
-        System.out.print("이메일: ");   String email = scan.nextLine();
-        System.out.print("전화번호: ");   int phoneNum = scan.nextInt();
+        System.out.print("사용자 이름: ");   String username = scan.next();
+        System.out.print("아이디: ");   String userid = scan.next();
+        System.out.print("비밀번호: ");   String pwd = scan.next();
+        System.out.print("이메일: ");   String email = scan.next();
+        System.out.print("전화번호: ");   String phoneNum = scan.next();
 
-        UserController.getInstance().signUp(username, userid, pwd, email, phoneNum);
-
+        boolean result = UserController.getInstance().signUp(username, userid, pwd, email, phoneNum);
+        if( result ){
+            System.out.println("회원가입 성공");
+        }else{
+            System.out.println("회원가입 실패");
+        }
     } // m end
 } // mainPage
 

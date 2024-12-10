@@ -19,8 +19,8 @@ public class UserController {
     }
 
     // 회원가입
-    public boolean signUp(String username, String userid, int pwd, String email, int phoneNum) {
-        UserDto userDto = new UserDto(username, userid, pwd, email, phoneNum);
+    public boolean signUp(String username, String userid, String pwd, String email, String phoneNum) {
+        UserDto userDto = new UserDto(username,userid,pwd,email,phoneNum);
         return UserDao.getInstance().signUp(userDto);
     }
 
