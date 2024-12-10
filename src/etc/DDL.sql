@@ -93,7 +93,7 @@ INSERT INTO Music (music_title, music_artist_id, music_genre, music_release_date
 ('Lost in the Stars', 2, 'Rock', '2023-11-15', '/music/lost_in_the_stars.mp3', FLOOR(RAND() * 1004)),
 ('Night Breeze', 3, 'Jazz', '2023-12-01', '/music/night_breeze.mp3', FLOOR(RAND() * 3024)),
 ('Heartbeats', 4, 'EDM', '2023-12-10', '/music/heartbeats.mp3', FLOOR(RAND() * 2000)),
-('Whispers of Love', 5, 'Classical', '2023-12-15', '/music/whispers_of_love.mp3', FLOOR(RAND() * 2520));
+('Whispers of Love', 5, 'Classical', '2023-12-15', '/music/whispers_of_love.mp3', FLOOR(RAND() * 2520));;
 
 INSERT INTO Playlist (user_num, music_id) VALUES
 (1, 1),
