@@ -24,27 +24,21 @@ public class PurchaseDto {
     public int getPurchaseId() {
         return purchaseId;
     }
-
     public void setPurchaseId(int purchaseId) {
         this.purchaseId = purchaseId;
     }
-
     public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
-
     public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
-
     public int getPurchasePrice() {
         return purchasePrice;
     }
-
     public void setPurchasePrice(int purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
-
     public int getPurchaseStatus() {
         return purchaseStatus;
     }
