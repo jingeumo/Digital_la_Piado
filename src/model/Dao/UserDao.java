@@ -65,11 +65,11 @@ public class UserDao {
             UserDto userDto1 = new UserDto( userid, pwd );
 
             // 여기 아래부터 고칠거
-            list.add( userDto );
-        }
-    }catch ( SQLException e ){ e.getMessage();  System.out.println("[ 게시물 출력시 예외발생]"); }
-    // 9. 구성한 리스트 객체 반환
-            return list;
+//            list.add( userDto );
+//        }
+//    }catch ( SQLException e ){ e.getMessage();  System.out.println("[ 게시물 출력시 예외발생]"); }
+//    // 9. 구성한 리스트 객체 반환
+//            return null;
 } // m end
 
 
