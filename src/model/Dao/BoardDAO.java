@@ -24,7 +24,7 @@ public class BoardDAO {
 
     // 게시글 생성
     public void createBoard(BoardDto board) {
-        String sql = "INSERT INTO board (board_title, board_content, user_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO board (board_title, board_content, user_num) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
@@ -38,7 +38,7 @@ public class BoardDAO {
     // 모든 게시글 조회
     public List<BoardDto> getAllBoards() {
         List<BoardDto> boards = new ArrayList<>();
-        String sql = "SELECT board_id, board_title, board_content, user_id FROM board";
+        String sql = "SELECT board_id, board_title, board_content, user_num FROM board";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -46,7 +46,7 @@ public class BoardDAO {
                         rs.getInt("board_id"),
                         rs.getString("board_title"),
                         rs.getString("board_content"),
-                        rs.getInt("user_id") // 작성자 ID
+                        rs.getInt("user_num") // 작성자 ID
                 ));
             }
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class BoardDAO {
 
     // 게시글 ID로 게시글 조회
     public BoardDto getBoardById(int boardId) {
-        String sql = "SELECT board_id, board_title, board_content, user_id FROM board WHERE board_id = ?";
+        String sql = "SELECT board_id, board_title, board_content, user_num FROM board WHERE board_id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, boardId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -67,7 +67,7 @@ public class BoardDAO {
                             rs.getInt("board_id"),
                             rs.getString("board_title"),
                             rs.getString("board_content"),
-                            rs.getInt("user_id") // 작성자 ID
+                            rs.getInt("user_num") // 작성자 ID
                     );
                 }
             }

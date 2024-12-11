@@ -30,7 +30,7 @@ public class BoardController {
 
     // 게시글 생성
     public void createBoard(String title, String content, String author) {
-        String sql = "INSERT INTO board (board_title, board_content, user_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO board (board_title, board_content, user_num) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, title);
             pstmt.setString(2, content);
@@ -44,7 +44,7 @@ public class BoardController {
     // 모든 게시글 조회
     public List<BoardDto> getAllBoards() {
         List<BoardDto> boards = new ArrayList<>();
-        String sql = "SELECT board_id, board_title, board_content, user_id FROM board";
+        String sql = "SELECT board_id, board_title, board_content, user_num FROM board";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class BoardController {
                         rs.getInt("board_id"),
                         rs.getString("board_title"),
                         rs.getString("board_content"),
-                        getUsernameById(rs.getInt("user_id")) // 작성자 이름 가져오기
+                        getUsernameById(rs.getInt("user_num")) // 작성자 이름 가져오기
                 ));
             }
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class BoardController {
 
     // 게시글 ID로 게시글 조회
     public BoardDto getBoardById(int boardId) {
-        String sql = "SELECT board_id, board_title, board_content, user_id FROM board WHERE board_id = ?";
+        String sql = "SELECT board_id, board_title, board_content, user_num FROM board WHERE board_id = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, boardId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -72,7 +72,7 @@ public class BoardController {
                             rs.getInt("board_id"),
                             rs.getString("board_title"),
                             rs.getString("board_content"),
-                            getUsernameById(rs.getInt("user_id"))
+                            getUsernameById(rs.getInt("user_num"))
                     );
                 }
             }
@@ -108,12 +108,12 @@ public class BoardController {
 
     // 사용자 이름으로 ID 가져오기
     private int getUserIdByUsername(String username) {
-        String sql = "SELECT user_id FROM users WHERE username = ?";
+        String sql = "SELECT user_num FROM users WHERE username = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("user_id");
+                    return rs.getInt("user_num");
                 }
             }
         } catch (SQLException e) {
@@ -124,7 +124,7 @@ public class BoardController {
 
     // 사용자 ID로 이름 가져오기
     private String getUsernameById(int userId) {
-        String sql = "SELECT username FROM users WHERE user_id = ?";
+        String sql = "SELECT username FROM users WHERE user_num = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             try (ResultSet rs = pstmt.executeQuery()) {

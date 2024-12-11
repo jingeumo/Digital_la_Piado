@@ -13,7 +13,7 @@ public class BoardView {
 
         // 사용자 정보 예시
         String userId = "admin123"; // 예시 사용자 ID
-        String username = "john_doe"; // 예시 사용자 이름
+        String username = "홍길동"; // 예시 사용자 이름
         int age = 20; // 예시 나이
         String phone = "01012341234"; // 예시 전화번호
         String email = "admin123@naver.com"; // 예시 이메일
@@ -88,7 +88,7 @@ public class BoardView {
 
                 case 4:
                     // 마이페이지
-                    System.out.println("--------------------------[ 마이페이지 ] --------------------------");
+                    System.out.println("-----------[ 마이페이지 ] ---------");
                     System.out.println("아이디 : " + userId);
                     System.out.println("사용자 이름 : " + username);
                     System.out.println("성별 : " + (0 == 0 ? "남성" : "여성")); // 예시로 남성
