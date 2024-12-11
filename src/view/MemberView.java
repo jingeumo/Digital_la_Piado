@@ -1,6 +1,7 @@
 package view;
 
 import controller.UserController;
+import model.Dto.UserDto;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class MemberView {
                 return;
             } else
                 System.out.println("잘못된 선택입니다.");
+                return;
             }
             // if
         } // while
@@ -31,35 +33,38 @@ public class MemberView {
         System.out.print("아이디: ");   String userid = scan.nextLine();
         System.out.print("비밀번호: ");   int pwd = scan.nextInt();
         System.out.print("이메일: ");   String email = scan.nextLine();
+        scan.nextLine();
         System.out.print("전화번호: ");   int phoneNum = scan.nextInt();
 
         UserController.getInstance().signUp(username, userid, pwd, email, phoneNum);
 
+
+
     } // m end
 } // mainPage
 
-//private static void login(Scanner scan) {
-//    System.out.print("아이디: "); String userid = scan.nextLine();
-//    System.out.print("비밀번호: "); String pwd = scan.nextLine();
-//
-//    for (User user : userList) {
-//        if (user.userid.equals(userid) && user.pwd.equals(pwd)) {
-//            loggedInUser = user;
-//            System.out.println("로그인 성공: " + username);
-//            return;
-//        }
-//    }
-//    System.out.println("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
-//} // m end
-//
-//private static void logout() {
-//    if (loggedInUser != null) {
-//        System.out.println(loggedInUser.userid + "님이 로그아웃되었습니다.");
-//        loggedInUser = null;
-//    } else {
-//        System.out.println("로그인 상태가 아닙니다.");
-//    }
-//}
+private static void login(Scanner scan) {
+    System.out.print("아이디: "); String userid = scan.nextLine();
+    System.out.print("비밀번호: "); String pwd = scan.nextLine();
+
+    for (UserDto user : userList) {
+        if (user.matches(userid, pwd)) {
+            loggedInUser = user;
+            System.out.println("로그인 성공! 환영합니다, " + user.userid + "님!");
+            return;
+        }
+    }
+    System.out.println("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
+} // m end
+
+private static void logout() {
+    if (loggedInUser != null) {
+        System.out.println(logout().userid + "님이 로그아웃되었습니다.");
+        loggedInUser = null;
+    } else {
+        System.out.println("로그인 상태가 아닙니다.");
+    }
+}
 
 
 /*
