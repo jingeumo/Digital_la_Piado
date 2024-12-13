@@ -1,4 +1,6 @@
 drop database if exists project01;   -- 만일 데이터베이스 존재하면 삭제
+DROP TABLE IF EXISTS Music; -- 음악 테이블 삭제
+
 create database project01;
 use project01;
 
@@ -6,7 +8,7 @@ use project01;
 -- Users 테이블 생성
 CREATE TABLE Users (
     user_num INT AUTO_INCREMENT PRIMARY KEY,  -- 사용자 고유 ID
-    user_id  VARCHAR(255) NOT NULL,				-- 사용자 아이디
+    user_id  VARCHAR(255) NOT NULL,            -- 사용자 아이디
     username VARCHAR(50) NOT NULL UNIQUE,     -- 사용자 이름 (고유)
     password VARCHAR(255) NOT NULL,           -- 비밀번호 (암호화된 형태로 저장)
     user_email VARCHAR(100) NOT NULL UNIQUE,  -- 이메일 주소 (고유)
@@ -32,11 +34,11 @@ CREATE TABLE Music (
     music_view INT DEFAULT 0,                   -- 조회수 (기본값 0)
     music_status INT DEFAULT 1,                 -- 음악 상태 (0 : 비공개, 1: 공개, 기본값 1)
     music_price INT,                            -- 음악 가격
-    music_play_status int default 0,            -- 음악 재생 상태
-    purchase_id int,
-    FOREIGN KEY (purchase_id) REFERENCES Purchase(purchase_id)
+    music_play_status Int default 0,         -- 음악 재생 상태
+    music_save_status int default 0,
     FOREIGN KEY (music_artist_id) REFERENCES users(user_num)  -- 아티스트 ID에 대한 외래키 제약조건
 );
+
 
 -- PlayHistory 테이블 생성
 CREATE TABLE Playlist (
@@ -67,7 +69,7 @@ CREATE TABLE Purchase (
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 구매 날짜
     purchase_price INT NOT NULL,                 -- 구매 가격
     purchase_status INT DEFAULT 1,               -- 구매 상태 (0: 취소, 1: 완료, 기본값 1)
-	user_num INT NOT NULL,                        -- 사용자 ID (Users 테이블의 외래키)
+    user_num INT NOT NULL,                        -- 사용자 ID (Users 테이블의 외래키)
     music_id INT NOT NULL,                       -- 음악 ID (Music 테이블의 외래키)
     FOREIGN KEY (user_num) REFERENCES users(user_num),  -- 사용자 ID에 대한 외래키 제약조건
     FOREIGN KEY (music_id) REFERENCES Music(music_id)  -- 음악 ID에 대한 외래키 제약조건
@@ -91,12 +93,14 @@ INSERT INTO Users (user_id, username, password, user_email, user_phone, user_gen
 ('user4', '박지민', 'hashed_password4', 'user4@example.com', '010-4567-8901', 1, 3, 1, 'playlist4'),
 ('user5', '최민수', 'hashed_password5', 'user5@example.com', '010-5678-9012', 0, 1, 1, 'playlist5');
 
-INSERT INTO Music (music_title, music_artist_id, music_genre, music_release_date, music_file_path, music_view) VALUES
-('Dreams Come True', 1, 'Pop', '2023-11-01', '/music/dreams_come_true.mp3', FLOOR(RAND() * 1001)),
-('Lost in the Stars', 2, 'Rock', '2023-11-15', '/music/lost_in_the_stars.mp3', FLOOR(RAND() * 1004)),
-('Night Breeze', 3, 'Jazz', '2023-12-01', '/music/night_breeze.mp3', FLOOR(RAND() * 3024)),
-('Heartbeats', 4, 'EDM', '2023-12-10', '/music/heartbeats.mp3', FLOOR(RAND() * 2000)),
-('Whispers of Love', 5, 'Classical', '2023-12-15', '/music/whispers_of_love.mp3', FLOOR(RAND() * 2520));
+INSERT INTO Music (music_title, music_artist_id, music_genre, music_release_date, music_file_path, music_view, music_price) VALUES
+('Dreams Come True', 1, '팝', '2023-11-01', '/music/dreams_come_true.mp3', 500, 1350),
+('Lost in the Stars', 2, '락', '2023-11-15', '/music/lost_in_the_stars.mp3', 600, 1400),
+('Night Breeze', 3, '재즈', '2023-12-01', '/music/night_breeze.mp3', 700, 1500),
+('Heartbeats', 4, 'EDM', '2023-12-10', '/music/heartbeats.mp3', 800, 1370),
+('Whispers of Love', 5, '클래식', '2023-12-15', '/music/whispers_of_love.mp3', 900, 1200);
+
+
 
 INSERT INTO Playlist (user_num, music_id) VALUES
 (1, 1),
@@ -133,6 +137,16 @@ select * from Playlist order by play_id asc;
 select * from board order by board_id asc;
 select * from Purchase order by purchase_id asc;
 SELECT * FROM ArtistMusic ORDER BY artist_music_id asc;
-
 select * from ArtistMusic;
+select * from Purchase;
+select * from Purchase where user_num = 3; -- 3번회원이 구해한 구매내역
+select * from Purchase p inner join music m on p.music_id = m.music_id where p.user_num = 3; -- 3번회원이 구매한내역정보와 음악정보;
+
+
+
+
+
+
+
+
 

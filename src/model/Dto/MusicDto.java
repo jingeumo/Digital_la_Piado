@@ -19,15 +19,19 @@ public class MusicDto {
     private int music_purchase_status;      // 음악 구매 상태
     private int music_save_status;      // 음악 저장 상태
 
-    public MusicDto(int music_id, int music_artist_id, String music_title, int music_play_status, String music_content, int music_purchase_status, Date music_release_date) {
+    public MusicDto(int music_id, String music_title, int music_artist_id, int music_play_status,
+                    String music_content, int music_save_status, int music_purchase_status,int music_price, Date music_release_date) {
         this.music_id = music_id;
-        this.music_artist_id = music_artist_id;
         this.music_title = music_title;
+        this.music_artist_id = music_artist_id;
         this.music_play_status = music_play_status;
         this.music_content = music_content;
-        this.music_purchase_status = music_purchase_status;
+        this.music_save_status=music_save_status;
+        this.music_purchase_status=music_purchase_status;
         this.music_release_date = music_release_date;
+        this.music_price=music_price;
     }
+
 
     public int getMusic_play_status() {return music_play_status;}
     public void setMusic_play_status(int music_play_status) {this.music_play_status = music_play_status;}

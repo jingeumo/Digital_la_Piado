@@ -16,18 +16,18 @@ public class MainView {
         return mainView;
     }
 
-    public void MainPrint(){
+    public void MainPrint(int userNum){
         while(true){
             System.out.print("[ 1. 메인 2. 플레이리스트 3. 게시판 4. 마이페이지 5. 로그아웃 ] : ");
             int choose = getUserInput();
-            MenuSelection(choose);
+            MenuSelection(choose, userNum);
         }
     }
 
-    public void MenuSelection(int choose) {
+    public void MenuSelection(int choose, int userNum) {
         switch (choose){
             case 1:
-                HomeView.getInstance().HomePrint();
+                HomeView.getInstance().HomePrint(userNum);
                 break;
             case 2:
                 //PlayhistoryController.PrintPlaylistView();

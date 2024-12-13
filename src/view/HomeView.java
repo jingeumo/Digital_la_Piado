@@ -17,14 +17,14 @@ public class HomeView {
         return homeView;
     }
 
-    public static void HomePrint() {
+    public void HomePrint(int userNum) {
         while (true) {
-            System.out.println("[ 홈 1. 현재 인기 음원차트 2. 최근 등록된 음악순 ] :");
+            System.out.print("[ 홈 1. 현재 인기 음원차트 2. 최근 등록된 음악순 ] : ");
             int homechoose = getUserInput();
             if (homechoose == 1) {
-                displayPopularMusic();
+                displayPopularMusic(userNum); // 사용자 ID 전달
             } else if (homechoose == 2) {
-                displayRecentMusic();
+                displayRecentMusic(userNum); // 사용자 ID 전달
             } else {
                 System.out.println("[ 잘못된 입력입니다. 1번 아니면 2번을 입력해주세요. ]");
                 continue;
@@ -32,19 +32,19 @@ public class HomeView {
         }
     }
 
-    static void displayPopularMusic() {
+    void displayPopularMusic(int userNum) {
         ArrayList<MusicDto> popularMusicList = HomeController.getInstance().getPopularMusic();
-        displayMusicList(popularMusicList, "[ 인기 음원 차트 ]");
+        displayMusicList(popularMusicList, "[ 인기 음원 차트 ]", userNum);
     }
 
-    static void displayRecentMusic() {
+    void displayRecentMusic(int userNum) {
         ArrayList<MusicDto> recentMusicList = HomeController.getInstance().getRecentMusic();
-        displayMusicList(recentMusicList, "[ 최근 등록된 음악 ]");
+        displayMusicList(recentMusicList, "[ 최근 등록된 음악 ]", userNum);
     }
 
-    private static void displayMusicList(ArrayList<MusicDto> musicList, String title) {
+    void displayMusicList(ArrayList<MusicDto> musicList, String title, int userNum) {
         System.out.println("[" + title + "]");
-        System.out.println("순위\t제목\t아티스트\t재생\t곡정보\t저장\t구매\t등록날짜");
+        System.out.println("순위\t제목\t아티스트\t재생\t곡정보\t저장\t가격\t구매\t등록날짜");
 
         for (int index = 0; index < musicList.size(); index++) {
             MusicDto music = musicList.get(index);
@@ -55,14 +55,15 @@ public class HomeView {
                     music.getMusic_play_status() == 0 ? "대기" : "재생",
                     music.getMusic_content(),
                     music.getMusic_save_status() == 0 ? "대기" : "저장완료",
+                    music.getMusic_price(),
                     music.getMusic_purchase_status(),
                     music.getMusic_release_date());
         }
 
-        handleMusicOptions(musicList);
+        handleMusicOptions(musicList, userNum);
     }
 
-    private static void handleMusicOptions(ArrayList<MusicDto> musicList) {
+    void handleMusicOptions(ArrayList<MusicDto> musicList, int userNum) {
         while (true) {
             System.out.print("[ 재생 및 구매할 곡 입력, -1 : 돌아가기, -2: 플레이리스트 저장 ] : ");
             int choice = getUserInput();
@@ -75,7 +76,7 @@ public class HomeView {
 
                 if (musicChoice > 0 && musicChoice <= musicList.size()) {
                     MusicDto selectedMusic = musicList.get(musicChoice - 1);
-                    saveToPlaylist(selectedMusic); // 선택한 음악을 저장
+                    saveToPlaylist(selectedMusic, userNum);; // 선택한 음악을 저장
                 } else {
                     System.out.println("[ 잘못된 입력입니다. 다시 입력해주세요. ]");
                 }
@@ -89,7 +90,7 @@ public class HomeView {
         }
     }
 
-    private static void handleMusicAction(MusicDto music) {
+    void handleMusicAction(MusicDto music) {
         System.out.print("[ 1 : " + music.getMusic_title() + "를 재생, 2: " + music.getMusic_title() + "를 구매 -1 : 돌아가기 ] : ");
         int action = getUserInput();
 
@@ -105,7 +106,7 @@ public class HomeView {
         }
     }
 
-    private static void purchaseMusic(MusicDto music) {
+    void purchaseMusic(MusicDto music) {
         // 이미 구매한 음악인지 확인
         if (music.getMusic_purchase_status() == 1) { // 1은 구매 완료 상태
             System.out.println("[ 이미 구매한 음악입니다. ]");
@@ -114,14 +115,14 @@ public class HomeView {
         System.out.print("[ " + music.getMusic_title() + "번 노래를 구매하시겠습니까? 1: 구매, 2: 취소 ] : ");
         int purchaseChoice = getUserInput();
         if (purchaseChoice == 1) {
-            music.setMusic_purchase_status(1);
+            HomeController.getInstance().purchaseMusic(music);
             System.out.println("[ " + music.getMusic_title() + "번 노래를 구매하셨습니다. ]");
         } else {
             System.out.println("[ 구매가 취소되었습니다. ]");
         }
     }
 
-    private static void saveToPlaylist(MusicDto music) {
+    void saveToPlaylist(MusicDto music, int userNum) {
         // 이미 저장된 음악인지 확인
         if (music.getMusic_save_status() == 1) { // 1은 저장 완료 상태
             System.out.println("[ 해당 곡이 이미 플레이리스트에 저장되었습니다. ]");
@@ -130,7 +131,7 @@ public class HomeView {
 
         // 저장되지 않은 경우
         System.out.println("[ 해당 곡을 내 플레이리스트에 저장합니다. ]");
-        music.setMusic_save_status(1); // 저장 상태를 1로 변경
+        HomeController.getInstance().saveToPlaylist(music, userNum);
         System.out.println("[ 저장 완료! ]");
     }
 
