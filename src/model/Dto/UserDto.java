@@ -42,7 +42,12 @@ public class UserDto {
         this.userMusic = userMusic;
     }
 
-    public UserDto(String username, String userid, int pwd, String email, int phoneNum) {
+    public UserDto(String userId, String username, String password, String userEmail, String userPhone) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.userEmail = userEmail;
+        this.userPhone = userPhone;
     }
 
     // Getter 및 Setter 메서드

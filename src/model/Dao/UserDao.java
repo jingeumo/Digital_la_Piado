@@ -46,31 +46,29 @@ public class UserDao {
             ps.executeUpdate();
             return true;
         }catch ( SQLException e ){
-            e.getMessage(); System.out.println("[ 게시물 등록시 예외발생]");
+            e.getMessage(); System.out.println("[ 게시물 등록시 예외발생 ]" + e);
         }
         return false;
     }
 
     // 로그인 예정
     public boolean login( UserDto userDto ) {
-        try {
-        String sql = "select * from user";  // 1. SQL 작성
-        PreparedStatement ps = conn.prepareStatement(sql); // 2. SQL 기재
-        ResultSet rs = ps.executeQuery();
-        while( rs.next() ){
-            String userid = rs.getString("userid");
-            String pwd = rs.getString("pwd");
 
-
-            UserDto userDto1 = new UserDto( userid, pwd );
-
-            // 여기 아래부터 고칠거
-//            list.add( userDto );
-//        }
-//    }catch ( SQLException e ){ e.getMessage();  System.out.println("[ 게시물 출력시 예외발생]"); }
-//    // 9. 구성한 리스트 객체 반환
-//            return null;
-} // m end
+        try{
+            String sql = "select * from Users where user_id=? and password=?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, userDto.getUserId());
+            ps.setString(2, userDto.getPassword());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return true;
+            }
+        }catch ( SQLException e ){
+            e.getMessage();
+            System.out.println("[ 로그인시 예외발생 ]");
+        }
+        return false;
+    } // m end
 
 
 
@@ -78,4 +76,4 @@ public class UserDao {
 
 
 
-} // m end
+} // c end
