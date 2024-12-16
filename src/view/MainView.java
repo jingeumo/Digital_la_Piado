@@ -19,7 +19,7 @@ public class MainView {
     }
 
     private static void MainPrint() {
-        System.out.println("[ MainView - " + userid + "님 환영합니다! ]"); // 사용자 환영 메시지
+        System.out.println("[플레이리스트]"); // 사용자 환영 메시지
         while (true) {
             System.out.print("[ 1. 메인 2. 플레이리스트 3. 게시판 4. 마이페이지 5. 로그아웃 ] : ");
             int choose = getUserInput();
