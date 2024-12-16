@@ -50,11 +50,6 @@ public class UserDto {
         this.userPhone = userPhone;
     }
 
-    public UserDto(String userid, String password) {
-        this.userId = userId;
-        this.password = password;
-    }
-
     // Getter 및 Setter 메서드
     public String getUserId() {
         return userId;

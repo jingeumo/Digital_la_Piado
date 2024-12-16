@@ -37,16 +37,14 @@ public class MemberView {
 
 
     private static void signUp(Scanner scan) {
-        scan.nextLine();
         System.out.print("사용자 이름: ");
-        String username = scan.nextLine();
+        String username = scan.next();
         System.out.print("아이디: ");
-        String userid = scan.nextLine();
+        String userid = scan.next();
         System.out.print("비밀번호: ");
         String pwd = scan.next();
         System.out.print("이메일: ");
-        String email = scan.nextLine();
-        scan.nextLine();
+        String email = scan.next();
         System.out.print("전화번호: ");
         String phoneNum = scan.next();
 

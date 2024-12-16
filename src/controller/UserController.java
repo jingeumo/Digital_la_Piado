@@ -13,13 +13,6 @@ public class UserController {
     private UserController() {}
     public static UserController getInstance() {return userController;}
 
-    private UserController() {
-    }
-
-    public static UserController getInstance() {
-        return userController;
-    }
-
     // 로그인 성공한 회원아이디 저장
     public String loginId = null; // null이면 비어있는, null이 아니면 로그인 성공한 아이디 넣을 예정
 

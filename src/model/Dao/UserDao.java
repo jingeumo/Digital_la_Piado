@@ -57,7 +57,7 @@ public class UserDao {
     }
 
     // 로그인 예정
-    public boolean login( UserDto userDto ) {
+    public boolean login( UserDto userDto ){
 
         try{
             String sql = "select * from Users where user_id=? and password=?;";
@@ -65,33 +65,13 @@ public class UserDao {
             ps.setString(1, userDto.getUserId());
             ps.setString(2, userDto.getPassword());
             ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                return true;
-
-            // ResultSet에서 데이터가 존재하면 로그인 성공
             if (rs.next()) {
-                loggedInUser = new UserDto(
-                        rs.getString("username"),
-                        rs.getString("user_id"),
-                        rs.getString("password"),
-                        rs.getString("user_email"),
-                        rs.getString("user_phone")
-                );
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("[ 로그인 시 예외 발생 ] " + e.getMessage());
         }
         return false;
     } // m end
-}
-
-
-
-
-
 
 } // c end
-
-        return loggedInUser;
-    }
-}
