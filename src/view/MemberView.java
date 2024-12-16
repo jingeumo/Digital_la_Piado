@@ -12,9 +12,9 @@ public class MemberView {
     public static void mainPage() {
         while (true) {
             String loginIn = UserController.getInstance().loginId;
-            System.out.println(  loginIn == null ? "로그인전" : loginIn+"님 로그인" );// 로그인 상태 확인용
+            System.out.println(  loginIn == null ? "[ 로그인전 ]" : loginIn+"님 로그인" );// 로그인 상태 확인용
 
-            System.out.print("1. 회원가입 2. 로그인 3. 종료 : 4. 로그아웃");
+            System.out.print("1. 회원가입 2. 로그인 3. 종료 : ");
             int choose = scan.nextInt();
             if (choose == 1) {
                 signUp(scan);
@@ -24,8 +24,6 @@ public class MemberView {
                 System.out.println("프로그램을 종료합니다.");
                 scan.close();
                 return;
-            } else if (choose == 4) {
-                logout();
             } else {
                 System.out.println("잘못된 선택입니다.");
                 return;
@@ -68,7 +66,7 @@ public class MemberView {
         boolean result = UserController.getInstance().login( userid, pwd );
         if (result ){
             System.out.println("로그인 성공.");
-            MainView.MainPrint();
+            MainView.getInstance().MainPrint();
         } else {
             System.out.println("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
         }

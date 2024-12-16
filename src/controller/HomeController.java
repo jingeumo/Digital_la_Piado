@@ -2,10 +2,8 @@ package controller;
 
 import model.Dao.HomeDao;
 import model.Dto.MusicDto;
-import view.HomeView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeController {
     private static HomeController homeController = new HomeController();
@@ -35,9 +33,10 @@ public class HomeController {
         return result;
     }
 
-    public boolean saveToPlaylist(MusicDto music, int userNum) {
-        boolean result = HomeDao.getInstance().saveMusicToPlaylist(music, userNum); // 사용자 ID를 전달
-        return result; // 플레이리스트에 저장 메서드 호출
+    public boolean saveToPlaylist(MusicDto music) {
+        boolean result = HomeDao.getInstance().saveMusicToPlaylist(music, UserController.getInstance().loginId);
+        return result;
     }
+
 
 }

@@ -20,11 +20,11 @@ public class UserDao {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project01","root", "1234");
-            System.out.println("[ BoardDB Connection OK ]");
+            System.out.println("[ project01 Connection OK ]");
         }catch ( ClassNotFoundException e ){
-            e.getMessage(); System.out.println("[ BoardDB Connection fail ]");
+            e.getMessage(); System.out.println("[ project01 Connection fail ]");
         }catch( SQLException e ){
-            e.getMessage(); System.out.println("[ BoardDB Connection fail ]");
+            e.getMessage(); System.out.println("[ project01 Connection fail ]");
         }
     } // 생성자 end
 
@@ -46,7 +46,7 @@ public class UserDao {
             ps.executeUpdate();
             return true;
         }catch ( SQLException e ){
-            e.getMessage(); System.out.println("[ 게시물 등록시 예외발생 ]" + e);
+            e.getMessage(); System.out.println("[ 회원가입 등록 시 예외발생 ]" + e);
         }
         return false;
     }

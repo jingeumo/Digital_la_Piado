@@ -30,11 +30,11 @@ public class HomeDao {
                     "CASE WHEN p.purchase_status = 1 THEN 'O' ELSE 'X' END AS 구매상태,m.music_release_date AS 발매일\n" +
                     "FROM Music m\n" +
                     "JOIN Users u ON m.music_artist_id = u.user_num\n" +
-                    "LEFT JOIN Playlist ph ON m.music_id = ph.music_id AND ph.user_num = ? \n" +
+                    "LEFT JOIN Playlist ph ON m.music_id = ph.music_id AND ph.user_num = ?\n" +
                     "LEFT JOIN Purchase p ON m.music_id = p.music_id AND p.user_num = ?\n" +
                     "JOIN (SELECT @rownum := 0) r\n" +
                     "WHERE m.music_status = 1\n" +
-                    "ORDER BY m.music_view DESC\n";
+                    "ORDER BY m.music_view DESC;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -115,14 +115,32 @@ public class HomeDao {
         }
         return false;
     }
+
+    // 사용자 이름으로 ID 가져오기
+    private int getUserIdByUsername(String username) {
+        String sql = "SELECT user_num FROM users WHERE username = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("user_num");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // 사용자 ID가 없을 경우
+    }
+
+
     // playlist로 저장
-    public boolean saveMusicToPlaylist(MusicDto music, int userNum) {
+    public boolean saveMusicToPlaylist(MusicDto music, String user_id) {
         try {
             String sql = "INSERT INTO Playlist (user_num, music_id) VALUES (?, ?);";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             // 값 설정
-            ps.setInt(1, userNum); // 사용자 ID
+            ps.setInt(1, getUserIdByUsername(user_id)); // 사용자 ID
             ps.setInt(2, music.getMusic_id()); // 음악 ID
 
             // 쿼리 실행
