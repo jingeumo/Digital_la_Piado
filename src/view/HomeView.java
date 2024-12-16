@@ -5,6 +5,7 @@ import model.Dto.MusicDto;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class HomeView {
@@ -32,21 +33,39 @@ public class HomeView {
     }
 
     static void displayPopularMusic() {
-        ArrayList<MusicDto> popularMusicList = HomeController.getInstance().getPopularMusic();
+        ArrayList<Map<String , String>> popularMusicList = HomeController.getInstance().getPopularMusic();
         displayMusicList(popularMusicList, "[ 인기 음원 차트 ]");
     }
 
     static void displayRecentMusic() {
-        ArrayList<MusicDto> recentMusicList = HomeController.getInstance().getRecentMusic();
-        displayMusicList(recentMusicList, "[ 최근 등록된 음악 ]");
+//        ArrayList<MusicDto> recentMusicList = HomeController.getInstance().getRecentMusic();
+//        displayMusicList(recentMusicList, "[ 최근 등록된 음악 ]");
     }
 
-    static void displayMusicList(ArrayList<MusicDto> musicList, String title) {
+    static void displayMusicList(ArrayList< Map<String , String> > musicList, String title) {
         System.out.println("[" + title + "]");
         System.out.println("출력테스트 -----------------------------------------------------");
         System.out.println("순위\t제목\t아티스트\t재생\t곡정보\t저장\t가격\t구매\t등록날짜");
-
-
+//        for(MusicDto music : musicList) {
+//            System.out.println(music.getMusic_title() + music.getMusic_artist_id() + music.getMusic_play_status() +
+//                    music.getMusic_content() + music.getMusic_save_status() +  music.getMusic_price() +
+//                    music.getMusic_purchase_status() +  music.getMusic_release_date()
+//            );
+//        }
+        for (int index = 0; index < musicList.size(); index++) {
+            Map<String , String> music = musicList.get(index);
+            System.out.printf("%d.\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",
+                    index + 1,
+                    music.get("music_id") ,
+                    music.get("music_title"),
+                    music.get("music_artist_id"), // 재생 상태
+                    music.get("music_play_status"),
+                    music.get("music_content"), // 저장 상태
+                    music.get("music_purchase_status"),
+                    music.get("music_price"),
+                    music.get("music_release_date"));
+        }
+        //handleMusicOptions( musicList);
     }
 
     void handleMusicOptions(ArrayList<MusicDto> musicList) {

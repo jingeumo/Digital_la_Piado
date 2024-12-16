@@ -4,6 +4,7 @@ import model.Dao.HomeDao;
 import model.Dto.MusicDto;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class HomeController {
     private static HomeController homeController = new HomeController();
@@ -19,8 +20,8 @@ public class HomeController {
      * 2.   음악제목2    이이름2	   대기       곡설명     대기    1350원
      */
     // 홈 출력
-    public ArrayList<MusicDto> getPopularMusic() {
-        ArrayList<MusicDto> result = HomeDao.getInstance().getPopularMusic();
+    public ArrayList<Map<String , String>> getPopularMusic() {
+        ArrayList< Map<String , String> > result = HomeDao.getInstance().getPopularMusic();
         return result;
     }
 
