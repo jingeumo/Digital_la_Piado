@@ -21,8 +21,23 @@ public class HomeController {
      * 2.   음악제목2    이이름2	   대기       곡설명     대기    1350원
      */
     // 홈 출력
-    public ArrayList<MusicDto> HomePrint() {
-        ArrayList<MusicDto> result = HomeDao.getInstance().HomePrint();
+    public ArrayList<MusicDto> getPopularMusic() {
+        ArrayList<MusicDto> result = HomeDao.getInstance().getPopularMusic();
         return result;
     }
+
+    public ArrayList<MusicDto> getRecentMusic() {
+        ArrayList<MusicDto> result = HomeDao.getInstance().getRecentMusic();
+        return result;
+    }
+    public boolean purchaseMusic(MusicDto music) {
+        boolean result = HomeDao.getInstance().updatePurchaseStatus(music); // 구매 상태 업데이트 메서드 호출
+        return result;
+    }
+
+    public boolean saveToPlaylist(MusicDto music, int userNum) {
+        boolean result = HomeDao.getInstance().saveMusicToPlaylist(music, userNum); // 사용자 ID를 전달
+        return result; // 플레이리스트에 저장 메서드 호출
+    }
+
 }
