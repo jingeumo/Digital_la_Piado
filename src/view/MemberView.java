@@ -68,6 +68,7 @@ public class MemberView {
         boolean result = UserController.getInstance().login( userid, pwd );
         if (result ){
             System.out.println("로그인 성공.");
+            BoardView.mainPage();
         } else {
             System.out.println("로그인 실패: 사용자 이름 또는 비밀번호가 잘못되었습니다.");
         }

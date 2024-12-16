@@ -16,7 +16,7 @@ public class BoardController {
             // 데이터베이스 연결 (URL, 사용자명, 비밀번호는 실제 DB에 맞게 수정)
             String url = "jdbc:mysql://localhost:3306/project01"; // 데이터베이스 URL
             String user = "root"; // DB 사용자명
-            String password = "tlarjsqh123"; // DB 비밀번호
+            String password = "1234"; // DB 비밀번호
 
             connection = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {

@@ -1,24 +1,16 @@
 package view;
 
 import controller.BoardController;
+import controller.UserController;
 import model.Dto.BoardDto;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class BoardView {
-    public static void main(String[] args) {
+    public static void mainPage() {
         BoardController controller = new BoardController();
         Scanner scanner = new Scanner(System.in);
-
-        // 사용자 정보 예시
-        String userId = "admin123"; // 예시 사용자 ID
-        String username = "홍길동"; // 예시 사용자 이름
-        int age = 20; // 예시 나이
-        String phone = "01012341234"; // 예시 전화번호
-        String email = "admin123@naver.com"; // 예시 이메일
-        String address = "인천광역시 부평구"; // 예시 주소
-        int userGrade = 1; // 예시 사용자 등급 (1: 개인)
 
         while (true) {
             System.out.println("-------------------------[ 게시판 등록 ]----------------------------");
@@ -34,7 +26,7 @@ public class BoardView {
                     String title = scanner.nextLine();
                     System.out.print("게시판 내용 : ");
                     String content = scanner.nextLine();
-                    controller.createBoard(title, content, username);
+                    controller.createBoard(title, content, UserController.getInstance().loginId);
                     System.out.println("[게시판 작성이 완료되었습니다.]");
                     break;
 
@@ -77,7 +69,7 @@ public class BoardView {
                             String newTitle = scanner.nextLine();
                             System.out.print("새 내용: ");
                             String newContent = scanner.nextLine();
-                            controller.updateBoard(new BoardDto(idToUpdate, newTitle, newContent, username));
+                            controller.updateBoard(new BoardDto(idToUpdate, newTitle, newContent, UserController.getInstance().loginId));
                         }
                     }
                     break;
@@ -89,14 +81,14 @@ public class BoardView {
                 case 4:
                     // 마이페이지
                     System.out.println("-----------[ 마이페이지 ] ---------");
-                    System.out.println("아이디 : " + userId);
-                    System.out.println("사용자 이름 : " + username);
-                    System.out.println("성별 : " + (0 == 0 ? "남성" : "여성")); // 예시로 남성
-                    System.out.println("나이 : " + age);
-                    System.out.println("전화번호 : " + phone);
-                    System.out.println("이메일 : " + email);
-                    System.out.println("주소 : " + address);
-                    System.out.println("등급 : " + (userGrade == 1 ? "개인" : "아티스트"));
+                    System.out.println("아이디 : " + UserController.getInstance().loginId);
+//                    System.out.println("사용자 이름 : " + username);
+//                    System.out.println("성별 : " + (0 == 0 ? "남성" : "여성")); // 예시로 남성
+//                    System.out.println("나이 : " + age);
+//                    System.out.println("전화번호 : " + phone);
+//                    System.out.println("이메일 : " + email);
+//                    System.out.println("주소 : " + address);
+//                    System.out.println("등급 : " + (userGrade == 1 ? "개인" : "아티스트"));
                     System.out.println("-1 를 입력하면 되돌아갑니다 : -1");
                     int backChoice = scanner.nextInt();
                     if (backChoice == -1) {
