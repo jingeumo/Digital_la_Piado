@@ -9,10 +9,9 @@ import java.util.Scanner;
 
 public class HomeView {
     static Scanner scan = new Scanner(System.in);
+    // 싱글톤
     private static HomeView homeView = new HomeView();
-
     private HomeView() {}
-
     public static HomeView getInstance() {
         return homeView;
     }
@@ -97,8 +96,8 @@ public class HomeView {
         if (action == -1) {
             return; // 이전 메뉴로 돌아가기
         } else if (action == 1) {
-            System.out.println("[ " + music.getMusic_title() + "번 노래를 재생 중입니다. ]");
-            System.out.println("[ " + music.getMusic_title() + "번 노래가 끝났습니다. ]");
+            System.out.println("[ " + music.getMusic_title() + " 노래를 재생 중입니다. ]");
+            System.out.println("[ " + music.getMusic_title() + " 노래가 끝났습니다. ]");
         } else if (action == 2) {
             purchaseMusic(music);
         } else {
