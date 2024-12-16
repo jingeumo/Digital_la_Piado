@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BoardView {
+    private static int s;
+
     public static void main(String[] args) {
         BoardController controller = new BoardController();
         Scanner scanner = new Scanner(System.in);
@@ -21,8 +23,7 @@ public class BoardView {
         int userGrade = 1; // 예시 사용자 등급 (1: 개인)
 
         while (true) {
-            System.out.println("-----------[ 게시판 등록 ]--------------");
-            System.out.println("1. 홈 2. 플레이리스트 3. 게시판 4. 마이페이지 5. 로그아웃 ");
+            System.out.println("<---[ 게시판 등록 ]--->");
             System.out.print("[1. 게시글 작성 2. 게시글 출력 -1 : 돌아가기] : ");
             int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 처리
@@ -40,27 +41,26 @@ public class BoardView {
 
                 case 2:
                     // 게시글 출력
-                    System.out.println("--------------------------[ 게시글 출력 ]---------------------------");
+                    System.out.println("<---[ 게시글 출력 ]--->");
                     List<BoardDto> boards = controller.getAllBoards();
                     if (boards.isEmpty()) {
                         System.out.println("게시글이 없습니다.");
-                        System.out.print("[1. 게시글 작성, 2. 게시글 출력 -1 : 돌아가기] : -1");
                     } else {
                         for (BoardDto board : boards) {
                             System.out.println("게시글 번호 : " + board.getId() + ", 작성자 : " + board.getAuthor() + ", 게시글 제목 : " + board.getTitle());
                         }
-                        System.out.print("[1. 게시글 작성, 2. 게시글 출력, 3. 게시글 선택 4. 게시글 수정 5. 게시글 삭제 -1 : 돌아가기] : ");
+                        System.out.print("[1. 게시글 선택 2. 게시글 수정 3. 게시글 삭제 -1 : 돌아가기] : ");
                         int subChoice = scanner.nextInt();
                         scanner.nextLine(); // 개행 문자 처리
 
-                        if (subChoice == 3) {
+                        if (subChoice == 1) {
                             // 게시글 선택
                             System.out.print("어떤 게시글 번호를 선택하시겠습니까 ? : ");
                             int boardId = scanner.nextInt();
                             scanner.nextLine(); // 개행 문자 처리
                             BoardDto selectedBoard = controller.getBoardById(boardId);
                             if (selectedBoard != null) {
-                                System.out.println("--------------------------[ 게시글 선택 ]--------------------------");
+                                System.out.println("<---[ 게시글 선택 ]--->");
                                 System.out.println("게시글 번호 : " + selectedBoard.getId());
                                 System.out.println("작성자 : " + selectedBoard.getAuthor());
                                 System.out.println("게시글 제목 : " + selectedBoard.getTitle());
@@ -68,7 +68,7 @@ public class BoardView {
                             } else {
                                 System.out.println("해당 게시글이 존재하지 않습니다.");
                             }
-                        } else if (subChoice == 4) {
+                        } else if (subChoice == 2) {
                             // 게시글 수정
                             System.out.print("어떤 게시글을 수정하시겠습니까? 해당 게시글 번호를 입력하십시오. ? : ");
                             int idToUpdate = scanner.nextInt();
@@ -86,7 +86,7 @@ public class BoardView {
                     System.out.println("돌아갑니다.");
                     break;
 
-                case 4:
+                case 3:
                     // 마이페이지
                     System.out.println("-----------[ 마이페이지 ] ---------");
                     System.out.println("아이디 : " + userId);
@@ -97,14 +97,14 @@ public class BoardView {
                     System.out.println("이메일 : " + email);
                     System.out.println("주소 : " + address);
                     System.out.println("등급 : " + (userGrade == 1 ? "개인" : "아티스트"));
-                    System.out.println("-1 를 입력하면 되돌아갑니다 : -1");
-                    int backChoice = scanner.nextInt();
-                    if (backChoice == -1) {
+                    System.out.print("s 를 입력하면 돌아갑니다 : ");
+                    String backChoice = scanner.nextLine();
+                    if (backChoice.equalsIgnoreCase("s")) {
                         System.out.println("돌아갑니다.");
                     }
                     break;
 
-                case 5:
+                case 4:
                     System.out.println("로그아웃");
                     return;
 
