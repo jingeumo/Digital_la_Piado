@@ -21,7 +21,7 @@ public class BoardView {
         int userGrade = 1; // 예시 사용자 등급 (1: 개인)
 
         while (true) {
-            System.out.println("-------------------------[ 게시판 등록 ]----------------------------");
+            System.out.println("-----------[ 게시판 등록 ]--------------");
             System.out.println("1. 홈 2. 플레이리스트 3. 게시판 4. 마이페이지 5. 로그아웃 ");
             System.out.print("[1. 게시글 작성 2. 게시글 출력 -1 : 돌아가기] : ");
             int choice = scanner.nextInt();
