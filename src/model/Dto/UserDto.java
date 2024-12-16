@@ -26,9 +26,9 @@ public class UserDto {
 
     // 모든 필드를 포함하는 생성자
     public UserDto(String userId, String username, String password, String userEmail,
-                Timestamp userCreatedAt, String userPhone, int userGender,
-                int userGrade, Timestamp userUpdatedAt, int userStatus,
-                String userMusic) {
+                   Timestamp userCreatedAt, String userPhone, int userGender,
+                   int userGrade, Timestamp userUpdatedAt, int userStatus,
+                   String userMusic) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -42,12 +42,17 @@ public class UserDto {
         this.userMusic = userMusic;
     }
 
-    public UserDto(String userId, String username, String password, String userEmail, String userPhone) {
-        this.userId = userId;
+    public UserDto(String username, String userId, String password, String userEmail, String userPhone) {
         this.username = username;
+        this.userId = userId;
         this.password = password;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
+    }
+
+    public UserDto(String userid, String password) {
+        this.userId = userId;
+        this.password = password;
     }
 
     // Getter 및 Setter 메서드

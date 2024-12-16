@@ -1,9 +1,10 @@
 package view;
 
 import controller.UserController;
-import model.Dao.UserDao;
+import model.Dto.MusicDto;
 import model.Dto.UserDto;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MemberView {
